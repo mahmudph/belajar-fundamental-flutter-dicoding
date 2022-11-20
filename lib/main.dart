@@ -5,7 +5,6 @@
  * Description
  */
 
-import 'package:intl/intl.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
