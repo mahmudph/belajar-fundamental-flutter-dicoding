@@ -7,6 +7,7 @@
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
+import 'package:mahmud_flutter_restauran/exceptions/exception.dart';
 
 void configLoading() {
   EasyLoading.instance
@@ -23,4 +24,23 @@ void configLoading() {
     ..maskType = EasyLoadingMaskType.black
     ..userInteractions = false
     ..dismissOnTap = false;
+}
+
+/// hanle catch exception on the cubit
+List<String> handleCatchCubitException(Exception e) {
+  /// set default message exception
+  List<String> message = [];
+
+  /// when exception type is FetchServiceException then set message
+  /// for this exception
+  if (e is FetchServiceException) {
+    message.add('Can\'t connect to the service, please try again');
+  } else if (e is RequestPostException) {
+    message.addAll(e.messages);
+  } else if (e is UnauthorizedRequestException) {
+    message.addAll(e.messages);
+  } else {
+    message.add("Something wen't wrong, please try again");
+  }
+  return message;
 }
