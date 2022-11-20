@@ -7,7 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mahmud_flutter_restauran/ui/widgets/header_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class InfoDataWidget extends StatelessWidget {
