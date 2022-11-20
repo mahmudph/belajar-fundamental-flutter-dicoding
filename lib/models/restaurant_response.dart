@@ -1,14 +1,23 @@
-// To parse this JSON data, do
-//
-//     final restaurantResponse = restaurantResponseFromMap(jsonString);
+/*
+ * Created by mahmud on Sun Nov 20 2022
+ * Email mahmud120398@gmail.com
+ * Copyright (c) 2022 mahmud
+ * Description
+ */
 
 import 'dart:convert';
 
 class RestaurantResponse {
   RestaurantResponse({
+    required this.error,
+    required this.message,
+    required this.count,
     required this.restaurants,
   });
 
+  bool error;
+  String? message;
+  int count;
   List<Restaurant> restaurants;
 
   factory RestaurantResponse.fromJson(String str) =>
@@ -18,12 +27,25 @@ class RestaurantResponse {
 
   factory RestaurantResponse.fromMap(Map<String, dynamic> json) =>
       RestaurantResponse(
+        error: json["error"],
+        message: json["message"],
+        count: json["count"] ?? json['founded'],
         restaurants: List<Restaurant>.from(
-            json["restaurants"].map((x) => Restaurant.fromMap(x))),
+          json["restaurants"].map(
+            (x) => Restaurant.fromMap(x),
+          ),
+        ),
       );
 
   Map<String, dynamic> toMap() => {
-        "restaurants": List<dynamic>.from(restaurants.map((x) => x.toMap())),
+        "error": error,
+        "message": message,
+        "count": count,
+        "restaurants": List<dynamic>.from(
+          restaurants.map(
+            (x) => x.toMap(),
+          ),
+        ),
       };
 }
 
@@ -35,7 +57,6 @@ class Restaurant {
     required this.pictureId,
     required this.city,
     required this.rating,
-    required this.menus,
   });
 
   String id;
@@ -44,7 +65,6 @@ class Restaurant {
   String pictureId;
   String city;
   double rating;
-  Menus menus;
 
   factory Restaurant.fromJson(String str) =>
       Restaurant.fromMap(json.decode(str));
@@ -58,7 +78,6 @@ class Restaurant {
         pictureId: json["pictureId"],
         city: json["city"],
         rating: json["rating"].toDouble(),
-        menus: Menus.fromMap(json["menus"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -68,50 +87,5 @@ class Restaurant {
         "pictureId": pictureId,
         "city": city,
         "rating": rating,
-        "menus": menus.toMap(),
-      };
-}
-
-class Menus {
-  Menus({
-    required this.foods,
-    required this.drinks,
-  });
-
-  List<Drink> foods;
-  List<Drink> drinks;
-
-  factory Menus.fromJson(String str) => Menus.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Menus.fromMap(Map<String, dynamic> json) => Menus(
-        foods: List<Drink>.from(json["foods"].map((x) => Drink.fromMap(x))),
-        drinks: List<Drink>.from(json["drinks"].map((x) => Drink.fromMap(x))),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "foods": List<dynamic>.from(foods.map((x) => x.toMap())),
-        "drinks": List<dynamic>.from(drinks.map((x) => x.toMap())),
-      };
-}
-
-class Drink {
-  Drink({
-    required this.name,
-  });
-
-  String name;
-
-  factory Drink.fromJson(String str) => Drink.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Drink.fromMap(Map<String, dynamic> json) => Drink(
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "name": name,
       };
 }
