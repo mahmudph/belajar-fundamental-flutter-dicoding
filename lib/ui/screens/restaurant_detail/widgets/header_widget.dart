@@ -10,7 +10,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mahmud_flutter_restauran/assets/asset_paths.dart';
 import 'package:mahmud_flutter_restauran/models/model.dart';
-import 'package:mahmud_flutter_restauran/repository/utils/repository_url.dart';
 import 'package:mahmud_flutter_restauran/ui/widgets/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
