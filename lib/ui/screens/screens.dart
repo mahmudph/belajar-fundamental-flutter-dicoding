@@ -1,0 +1,10 @@
+/*
+ * Created by mahmud on Sun Oct 23 2022
+ * Email mahmud120398@gmail.com
+ * Copyright (c) 2022 mahmud
+ * Description
+ */
+
+export 'splashscreen/splashscreen.dart';
+export 'restaurant/restaurant_screen.dart';
+export 'restaurant_detail/restaurant_detail_screen.dart';
