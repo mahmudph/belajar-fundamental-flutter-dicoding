@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:mahmud_flutter_restauran/models/restaurant_model.dart';
-import 'package:mahmud_flutter_restauran/repository/app_repository.dart';
+import 'package:mahmud_flutter_restauran/models/restaurant_response.dart';
+import 'package:mahmud_flutter_restauran/repository/repository.dart';
 
 part 'restaurant_state.dart';
 
 class RestaurantCubit extends Cubit<RestaurantState> {
-  final AppRepository repository;
+  final AppRepositoryImpl repository;
   RestaurantCubit({
     required this.repository,
   }) : super(RestaurantInitial());

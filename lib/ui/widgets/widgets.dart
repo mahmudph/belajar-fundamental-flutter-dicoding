@@ -10,3 +10,4 @@ export 'button_widget.dart';
 export 'info_data_widget.dart';
 export 'restaurant_item_widget.dart';
 export 'chip_widget.dart';
+export 'search_field_widget.dart';

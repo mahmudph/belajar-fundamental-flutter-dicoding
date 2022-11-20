@@ -6,6 +6,9 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mahmud_flutter_restauran/repository/repository.dart';
+import 'cubit/restaurant_detail_cubit.dart';
 import 'restaurant_detail_content.dart';
 
 class RestaurantDetailScreen extends StatelessWidget {
@@ -13,9 +16,17 @@ class RestaurantDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final settings = ModalRoute.of(context)!.settings;
+    final restaurantId = settings.arguments as String;
+
+    return Scaffold(
       body: SafeArea(
-        child: RestaurantDetailContent(),
+        child: BlocProvider(
+          create: (_) => RestaurantDetailCubit(
+            repositoryImpl: RepositoryProvider.of<AppRepositoryImpl>(context),
+          )..doGetDetailRestaurant(restaurantId),
+          child: const RestaurantDetailContent(),
+        ),
       ),
     );
   }

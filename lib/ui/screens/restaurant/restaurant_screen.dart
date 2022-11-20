@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mahmud_flutter_restauran/repository/app_repository.dart';
+import 'package:mahmud_flutter_restauran/repository/repository.dart';
 import 'package:mahmud_flutter_restauran/ui/widgets/widgets.dart';
 
 import 'cubit/restaurant_cubit.dart';
@@ -20,12 +20,12 @@ class ResturantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const HeaderWidget(
-        title: "List Restaurants",
+        title: "Restaurants",
       ),
       body: SafeArea(
         child: BlocProvider(
           create: (_) => RestaurantCubit(
-            repository: RepositoryProvider.of<AppRepository>(context),
+            repository: RepositoryProvider.of<AppRepositoryImpl>(context),
           )..doGetRestaurantData(),
           child: const ResturantContent(),
         ),

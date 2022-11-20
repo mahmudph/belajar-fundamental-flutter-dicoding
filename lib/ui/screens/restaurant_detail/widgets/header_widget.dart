@@ -6,13 +6,16 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mahmud_flutter_restauran/models/restaurant_model.dart';
+import 'package:mahmud_flutter_restauran/assets/asset_paths.dart';
+import 'package:mahmud_flutter_restauran/models/model.dart';
+import 'package:mahmud_flutter_restauran/repository/utils/repository_url.dart';
 import 'package:mahmud_flutter_restauran/ui/widgets/widgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HeaderRestaurantWidget extends StatelessWidget {
-  final Restaurant restaurant;
+  final RestaurantDetail restaurant;
   const HeaderRestaurantWidget({
     Key? key,
     required this.restaurant,
@@ -27,9 +30,12 @@ class HeaderRestaurantWidget extends StatelessWidget {
           Positioned.fill(
             child: Hero(
               tag: restaurant.id,
-              child: Image.network(
-                restaurant.pictureId,
+              child: FadeInImage.assetNetwork(
+                image:
+                    "${dotenv.env["BASE_URL"]}/images/medium/${restaurant.pictureId}",
                 fit: BoxFit.cover,
+                placeholder: AssetPaths.placeholderImage,
+                imageErrorBuilder: (_, e, s) => const Icon(Icons.error),
               ),
             ),
           ),

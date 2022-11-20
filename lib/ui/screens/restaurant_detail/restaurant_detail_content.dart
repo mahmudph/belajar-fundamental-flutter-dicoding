@@ -6,8 +6,14 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mahmud_flutter_restauran/models/restaurant_model.dart';
+import 'package:mahmud_flutter_restauran/models/model.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:mahmud_flutter_restauran/assets/asset_paths.dart';
+import 'package:mahmud_flutter_restauran/extensions/extensions.dart';
+import 'package:mahmud_flutter_restauran/ui/screens/restaurant_detail/cubit/restaurant_detail_cubit.dart';
+import 'package:mahmud_flutter_restauran/ui/widgets/info_data_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'widgets/header_widget.dart';
@@ -39,9 +45,10 @@ class _RestaurantDetailContentState extends State<RestaurantDetailContent>
 
   Widget contentRestaurant(
     BuildContext context,
-    Restaurant restaurant,
+    RestaurantDetail restaurant,
   ) {
     final ColorScheme color = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -66,6 +73,14 @@ class _RestaurantDetailContentState extends State<RestaurantDetailContent>
               style: GoogleFonts.poppins(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              restaurant.address,
+              textAlign: TextAlign.left,
+              style: GoogleFonts.poppins(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Padding(
@@ -149,19 +164,43 @@ class _RestaurantDetailContentState extends State<RestaurantDetailContent>
 
   @override
   Widget build(BuildContext context) {
-    final settings = ModalRoute.of(context)!.settings;
-    final restaurant = settings.arguments as Restaurant;
-    return SizedBox(
-      height: 100.h,
-      width: 100.w,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            HeaderRestaurantWidget(restaurant: restaurant),
-            contentRestaurant(context, restaurant),
-          ],
-        ),
-      ),
+    final bloc = BlocProvider.of<RestaurantDetailCubit>(context);
+
+    return BlocConsumer<RestaurantDetailCubit, RestaurantDetailState>(
+      bloc: bloc,
+      listener: (context, state) {
+        if (state is RestaurantDetailLoading) {
+          EasyLoading.show();
+        } else {
+          if (EasyLoading.isShow) EasyLoading.dismiss();
+          if (state is RestaurantDetailFailure) {
+            context.showErrorToastMessage(state.message);
+          }
+        }
+      },
+      buildWhen: (_, state) {
+        return state is RestaurantDetailSuccess ||
+            state is RestaurantDetailFailure;
+      },
+      builder: (context, state) {
+        if (state is RestaurantDetailSuccess) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                HeaderRestaurantWidget(restaurant: state.data),
+                contentRestaurant(context, state.data),
+              ],
+            ),
+          );
+        } else if (state is RestaurantDetailFailure) {
+          return InfoDataWidget(
+            assetImage: AssetPaths.error,
+            title: "Something wen't wrong",
+            description: state.message,
+          );
+        }
+        return Container();
+      },
     );
   }
 }

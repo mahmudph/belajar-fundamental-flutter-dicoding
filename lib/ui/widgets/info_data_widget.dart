@@ -50,7 +50,7 @@ class InfoDataWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 2.px),
+            padding: EdgeInsets.symmetric(horizontal: 16.px),
             child: Text(
               description,
               maxLines: 2,
