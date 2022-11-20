@@ -13,4 +13,5 @@ Map<String, WidgetBuilder> registerRoutes = {
   Routes.splashscreen: (_) => const Splashscreen(),
   Routes.listRestauran: (_) => const ResturantScreen(),
   Routes.detailRestauran: (_) => const RestaurantDetailScreen(),
+  Routes.searchRestauran: (_) => const SearchScreen(),
 };

@@ -9,4 +9,5 @@ class Routes {
   static const String splashscreen = '/';
   static const String listRestauran = '/list-restauran';
   static const String detailRestauran = '/restauran-detail';
+  static const String searchRestauran = '/search-restaurant';
 }
