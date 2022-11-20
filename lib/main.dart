@@ -9,8 +9,9 @@ import 'package:flash/flash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:mahmud_flutter_restauran/repository/app_repository.dart';
+import 'package:mahmud_flutter_restauran/repository/repository_impl/app_repository.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'routes/register_routes.dart';
@@ -20,6 +21,7 @@ import 'utils/utils.dart';
 
 void main() async {
   configLoading();
+  await dotenv.load();
   runApp(MyApp());
 }
 
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      create: (_) => AppRepository(),
+      create: (_) => AppRepositoryImpl(),
       child: MaterialApp(
         navigatorKey: _navigatorState,
         routes: registerRoutes,
