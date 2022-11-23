@@ -7,7 +7,9 @@
 
 class Routes {
   static const String splashscreen = '/';
-  static const String listRestauran = '/list-restauran';
+  static const String dashboardScreen = '/dashboard';
   static const String detailRestauran = '/restauran-detail';
   static const String searchRestauran = '/search-restaurant';
+  static const String favoriteRestauran = '/favorite';
+  static const String settingsRestauran = '/settings';
 }

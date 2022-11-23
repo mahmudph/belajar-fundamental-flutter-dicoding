@@ -11,7 +11,7 @@ import 'package:mahmud_flutter_restauran/ui/screens/screens.dart';
 
 Map<String, WidgetBuilder> registerRoutes = {
   Routes.splashscreen: (_) => const Splashscreen(),
-  Routes.listRestauran: (_) => const ResturantScreen(),
+  Routes.dashboardScreen: (_) => const DashboardScreen(),
   Routes.detailRestauran: (_) => const RestaurantDetailScreen(),
   Routes.searchRestauran: (_) => const SearchScreen(),
 };
