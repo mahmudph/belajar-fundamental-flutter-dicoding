@@ -23,7 +23,6 @@ class ButtonWidget extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: colorScheme.primary,
         padding: EdgeInsets.symmetric(
           horizontal: 8.px,
           vertical: 12.px,
@@ -32,6 +31,7 @@ class ButtonWidget extends StatelessWidget {
       onPressed: onPress,
       child: Text(
         buttonName,
+        textAlign: TextAlign.center,
         style: GoogleFonts.montserrat(
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,

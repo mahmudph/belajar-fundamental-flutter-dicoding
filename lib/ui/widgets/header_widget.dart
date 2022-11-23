@@ -11,7 +11,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HeaderWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final bool centerTitle, withForegroundColor;
+  final bool centerTitle, withForegroundColor, enableBackButton;
   final double elevation;
   final List<Widget>? actions;
   const HeaderWidget({
@@ -20,6 +20,7 @@ class HeaderWidget extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.elevation = 0,
     this.centerTitle = true,
+    this.enableBackButton = true,
     this.withForegroundColor = false,
   }) : super(key: key);
 
@@ -33,7 +34,7 @@ class HeaderWidget extends StatelessWidget implements PreferredSizeWidget {
         elevation: elevation,
         centerTitle: centerTitle,
         backgroundColor: theme.primary,
-        leading: Navigator.canPop(context)
+        leading: enableBackButton && Navigator.canPop(context)
             ? Padding(
                 padding: EdgeInsets.only(left: 12.px),
                 child: IconButton(
