@@ -5,8 +5,9 @@
  * Description
  */
 
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mahmud_flutter_restauran/exceptions/exception.dart';
 
 void configLoading() {
@@ -43,4 +44,23 @@ List<String> handleCatchCubitException(Exception e) {
     message.add("Something wen't wrong, please try again");
   }
   return message;
+}
+
+DateTime getFrequenltyPeriodictSchedule(DateTime currentDateTime) {
+  final dateFormat = DateFormat('y/M/d');
+  const timeSpecific = "11:00:00";
+  final completeFormat = DateFormat('y/M/d H:m:s');
+
+  // Today Format
+  final todayDate = dateFormat.format(currentDateTime);
+  final todayDateAndTime = "$todayDate $timeSpecific";
+  var resultToday = completeFormat.parseStrict(todayDateAndTime);
+
+  // Tomorrow Format
+  var formatted = resultToday.add(const Duration(days: 1));
+  final tomorrowDate = dateFormat.format(formatted);
+  final tomorrowDateAndTime = "$tomorrowDate $timeSpecific";
+  var resultTomorrow = completeFormat.parseStrict(tomorrowDateAndTime);
+
+  return currentDateTime.isAfter(resultToday) ? resultTomorrow : resultToday;
 }

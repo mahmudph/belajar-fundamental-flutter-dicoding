@@ -5,10 +5,11 @@
  * Description
  */
 
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:workmanager/workmanager.dart';
+
+import 'utils.dart';
 
 class Scheduler {
   final Workmanager workmanager = Workmanager();
@@ -18,13 +19,15 @@ class Scheduler {
 
   Future<void> startPeriodictNotification() async {
     try {
+      final now = DateTime.now();
+      final timeExecution = getFrequenltyPeriodictSchedule(now);
+      final delayExecution = timeExecution.difference(now);
+
       await workmanager.registerPeriodicTask(
         "1",
         "show-notif-restaurant",
         frequency: const Duration(hours: 24),
-        initialDelay: Duration(
-          seconds: getFrequenltyPeriodictSchedule().second,
-        ),
+        initialDelay: delayExecution,
         constraints: Constraints(
           networkType: NetworkType.connected,
         ),
@@ -52,25 +55,5 @@ class Scheduler {
     } catch (e) {
       debugPrint(e.toString());
     }
-  }
-
-  DateTime getFrequenltyPeriodictSchedule() {
-    final now = DateTime.now();
-    final dateFormat = DateFormat('y/M/d');
-    const timeSpecific = "11:00:00";
-    final completeFormat = DateFormat('y/M/d H:m:s');
-
-    // Today Format
-    final todayDate = dateFormat.format(now);
-    final todayDateAndTime = "$todayDate $timeSpecific";
-    var resultToday = completeFormat.parseStrict(todayDateAndTime);
-
-    // Tomorrow Format
-    var formatted = resultToday.add(const Duration(days: 1));
-    final tomorrowDate = dateFormat.format(formatted);
-    final tomorrowDateAndTime = "$tomorrowDate $timeSpecific";
-    var resultTomorrow = completeFormat.parseStrict(tomorrowDateAndTime);
-
-    return now.isAfter(resultToday) ? resultTomorrow : resultToday;
   }
 }
