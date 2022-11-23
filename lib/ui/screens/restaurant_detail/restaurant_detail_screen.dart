@@ -7,7 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mahmud_flutter_restauran/models/restaurant_response.dart';
 import 'package:mahmud_flutter_restauran/repository/repository.dart';
+import 'package:mahmud_flutter_restauran/state/cubit/app_state_cubit.dart';
 import 'cubit/restaurant_detail_cubit.dart';
 import 'restaurant_detail_content.dart';
 
@@ -17,15 +19,18 @@ class RestaurantDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = ModalRoute.of(context)!.settings;
-    final restaurantId = settings.arguments as String;
+    final restaurant = settings.arguments as Restaurant;
 
     return Scaffold(
       body: SafeArea(
         child: BlocProvider(
           create: (_) => RestaurantDetailCubit(
+            appStateCubit: BlocProvider.of<AppStateCubit>(context),
             repositoryImpl: RepositoryProvider.of<AppRepositoryImpl>(context),
-          )..doGetDetailRestaurant(restaurantId),
-          child: const RestaurantDetailContent(),
+          )..doGetDetailRestaurant(restaurant.id),
+          child: RestaurantDetailContent(
+            restaurant: restaurant,
+          ),
         ),
       ),
     );

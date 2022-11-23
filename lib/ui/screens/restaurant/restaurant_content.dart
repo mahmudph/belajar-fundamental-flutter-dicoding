@@ -58,7 +58,7 @@ class ResturantContent extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       Routes.detailRestauran,
-                      arguments: data[index].id,
+                      arguments: data[index],
                     );
                   },
                 );

@@ -29,7 +29,7 @@ class _SplashscreenState extends State<Splashscreen> {
     Future.delayed(duration).then((_) {
       Navigator.pushNamedAndRemoveUntil(
         context,
-        Routes.listRestauran,
+        Routes.dashboardScreen,
         (route) => false,
       );
     });

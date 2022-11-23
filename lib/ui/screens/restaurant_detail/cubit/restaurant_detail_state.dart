@@ -27,4 +27,7 @@ class RestaurantDetailFailure extends RestaurantDetailState {
   const RestaurantDetailFailure({
     required this.message,
   });
+
+  @override
+  List<Object> get props => [message];
 }

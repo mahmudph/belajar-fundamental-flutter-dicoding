@@ -12,6 +12,7 @@ import 'package:mahmud_flutter_restauran/models/model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mahmud_flutter_restauran/assets/asset_paths.dart';
 import 'package:mahmud_flutter_restauran/extensions/extensions.dart';
+import 'package:mahmud_flutter_restauran/state/cubit/app_state_cubit.dart';
 import 'package:mahmud_flutter_restauran/ui/screens/restaurant_detail/cubit/restaurant_detail_cubit.dart';
 import 'package:mahmud_flutter_restauran/ui/widgets/info_data_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -20,7 +21,11 @@ import 'widgets/header_widget.dart';
 import 'widgets/restaurant_menu_item_widget.dart';
 
 class RestaurantDetailContent extends StatefulWidget {
-  const RestaurantDetailContent({Key? key}) : super(key: key);
+  final Restaurant restaurant;
+  const RestaurantDetailContent({
+    Key? key,
+    required this.restaurant,
+  }) : super(key: key);
 
   @override
   State<RestaurantDetailContent> createState() =>
@@ -46,6 +51,7 @@ class _RestaurantDetailContentState extends State<RestaurantDetailContent>
   Widget contentRestaurant(
     BuildContext context,
     RestaurantDetail restaurant,
+    RestaurantDetailCubit bloc,
   ) {
     final ColorScheme color = Theme.of(context).colorScheme;
 
@@ -59,13 +65,42 @@ class _RestaurantDetailContentState extends State<RestaurantDetailContent>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              restaurant.name,
-              textAlign: TextAlign.left,
-              style: GoogleFonts.poppins(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  restaurant.name,
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.poppins(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                BlocSelector<AppStateCubit, AppStateState, bool>(
+                  selector: (state) {
+                    if (state is AppDataState) {
+                      return state.isFavoriteRestaurant(widget.restaurant.id);
+                    }
+                    return false;
+                  },
+                  builder: (context, isInFavorite) {
+                    return IconButton(
+                      onPressed: () {
+                        if (isInFavorite) {
+                          bloc.doDeleteFavoriteRestaurant(widget.restaurant);
+                        } else {
+                          bloc.doAddFavoriteRestaurant(widget.restaurant);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        color: isInFavorite ? Colors.redAccent : Colors.black,
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
             Text(
               restaurant.city,
@@ -188,7 +223,7 @@ class _RestaurantDetailContentState extends State<RestaurantDetailContent>
             child: Column(
               children: [
                 HeaderRestaurantWidget(restaurant: state.data),
-                contentRestaurant(context, state.data),
+                contentRestaurant(context, state.data, bloc),
               ],
             ),
           );

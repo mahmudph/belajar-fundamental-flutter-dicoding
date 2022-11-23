@@ -26,7 +26,6 @@ class RestaurantCubit extends Cubit<RestaurantState> {
       /**
        * add duration to make it like fetch from server
        */
-      await Future.delayed(const Duration(seconds: 3));
       final response = await repository.getRestaurantData();
       emit(RestaurantSuccess(data: response.restaurants));
     } catch (e) {
