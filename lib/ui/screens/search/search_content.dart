@@ -73,7 +73,7 @@ class _SearchContentState extends State<SearchContent> {
                           Navigator.pushNamed(
                             context,
                             Routes.detailRestauran,
-                            arguments: state.data[index].id,
+                            arguments: state.data[index],
                           );
                         },
                       );
