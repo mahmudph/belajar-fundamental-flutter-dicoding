@@ -16,13 +16,17 @@ A new Flutter project.
 ## Sample aplication
 
 - dashboard screen
-  ![dashboard app](https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/dashboard.png)
+  <img src="https://raw.githubusercontent.com/mahmudph/belajar-fundamental-flutter-dicoding/main/resources/dashboard.png" alt="dashboard app" style="zoom: 25%;" />
 
 - favorite screen
-  ![favorite screen]('https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/favorite.png')
+  <img src="https://raw.githubusercontent.com/mahmudph/belajar-fundamental-flutter-dicoding/main/resources/favorite.png" alt="favorite screen" style="zoom: 25%;" />
 
 - setting screen
-  ![setting screen]('https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/settings.png')
+  <img src="https://raw.githubusercontent.com/mahmudph/belajar-fundamental-flutter-dicoding/main/resources/settings.png" alt="setting screen" style="zoom: 25%;" />
 
+  
+  
 - detail screen
-  ![detail screen]('https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/detail.png')
+  <img src="https://raw.githubusercontent.com/mahmudph/belajar-fundamental-flutter-dicoding/main/resources/detail.png" alt="detail screen" style="zoom:25%;" />
+  
+  
