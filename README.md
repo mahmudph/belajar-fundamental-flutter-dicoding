@@ -16,13 +16,13 @@ A new Flutter project.
 ## Sample aplication
 
 - dashboard screen
-  ![dashboard app]('./resources/dashboard.png')
+  ![dashboard app](https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/dashboard.png)
 
 - favorite screen
-  ![favorite screen]('./resources/favorite.png')
+  ![favorite screen]('https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/favorite.png')
 
 - setting screen
-  ![setting screen]('./resources/settings.png')
+  ![setting screen]('https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/settings.png')
 
 - detail screen
-  ![detail screen]('./resources/detail.png')
+  ![detail screen]('https://github.com/mahmudph/belajar-fundamental-flutter-dicoding/blob/main/resources/detail.png')
